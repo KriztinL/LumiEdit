@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>LumiEdit</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root {
+    --bg: #1e1e2f;
+    --panel: #12121c;
+    --text: #ffffff;
+    --accent: #6c63ff;
+}
+
+.light {
+    --bg: #f4f4f8;
+    --panel: #ffffff;
+    --text: #000000;
+    --accent: #4a4aff;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    padding: 15px;
+    background: var(--panel);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.controls button, select {
+    margin-left: 5px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background: var(--accent);
+    color: white;
+}
+
+textarea {
+    flex: 1;
+    margin: 10px;
+    padding: 15px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    resize: none;
+    background: var(--panel);
+    color: var(--text);
+    font-size: 16px;
+}
+
+footer {
+    padding: 8px;
+    text-align: center;
+    font-size: 13px;
+    opacity: 0.8;
+}
+</style>
+</head>
+
+<body>
+<header>
+    <h1>✨ LumiEdit</h1>
+    <div class="controls">
+        <button onclick="saveFile()">💾 Save</button>
+        <button onclick="loadFile()">📂 Load</button>
+        <button onclick="toggleMode()">🌗 Mode</button>
+        <select onchange="changeTheme(this.value)">
+            <option value="default">Default</option>
+            <option value="blue">Blue</option>
+            <option value="green">Green</option>
+            <option value="red">Red</option>
+        </select>
+    </div>
+</header>
+
+<textarea id="editor" placeholder="Start typing..."></textarea>
+
+<footer>
+    <span id="wordCount">Words: 0</span>
+</footer>
+
+<input type="file" id="fileInput" hidden>
+
+<script>
+const editor = document.getElementById("editor");
+const wordCount = document.getElementById("wordCount");
+const fileInput = document.getElementById("fileInput");
+
+editor.addEventListener("input", () => {
+    const words = editor.value.trim().split(/\s+/).filter(w => w.length > 0);
+    wordCount.textContent = "Words: " + words.length;
+});
+
+function saveFile() {
+    const blob = new Blob([editor.value], { type: "text/plain" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "LumiEdit.txt";
+    a.click();
+}
+
+function loadFile() {
+    fileInput.click();
+}
+
+fileInput.addEventListener("change", () => {
+    const file = fileInput.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => editor.value = e.target.result;
+    reader.readAsText(file);
+});
+
+function toggleMode() {
+    document.body.classList.toggle("light");
+}
+
+function changeTheme(theme) {
+    const root = document.documentElement;
+    if (theme === "blue") root.style.setProperty("--accent", "#2196f3");
+    if (theme === "green") root.style.setProperty("--accent", "#4caf50");
+    if (theme === "red") root.style.setProperty("--accent", "#f44336");
+    if (theme === "default") root.style.setProperty("--accent", "#6c63ff");
+}
+</script>
+</body>
+</html>
