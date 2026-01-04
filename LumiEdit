@@ -143,3 +143,114 @@ function changeTheme(theme) {
 </script>
 </body>
 </html>
+
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LumiEdit Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Dashboard</h1>
+        <nav>
+            <ul>
+                <li><a href="edit-studio.html">Edit Studio</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="marketplace.html">Marketplace</a></li>
+                <li><a href="offers.html">Offers</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="projects">
+            <h2>Your Projects</h2>
+            <ul id="project-list"></ul>
+        </section>
+        <section class="stats">
+            <h2>Stats</h2>
+            <p>Projects: <span id="project-count">0</span></p>
+            <p>Edits: <span id="edit-count">0</span></p>
+        </section>
+        <section class="notifications">
+            <h2>Notifications</h2>
+            <ul id="notification-list"></ul>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
+
+<!-- edit-studio.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LumiEdit Studio</title>
+    <link rel="stylesheet" href="edit-studio.css">
+</head>
+<body>
+    <header>
+        <h1>Edit Studio</h1>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="marketplace.html">Marketplace</a></li>
+                <li><a href="offers.html">Offers</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="editor">
+            <h2>Editor</h2>
+            <div class="editor-toolbar">
+                <button id="undo-btn">Undo</button>
+                <button id="redo-btn">Redo</button>
+                <button id="cut-btn">Cut</button>
+                <button id="copy-btn">Copy</button>
+                <button id="paste-btn">Paste</button>
+            </div>
+            <div id="editor-area" contenteditable="true"></div>
+        </section>
+        <section class="tools">
+            <h2>Tools</h2>
+            <ul>
+                <li><button id="text-tool">Text</button></li>
+                <li><button id="image-tool">Image</button></li>
+                <li><button id="audio-tool">Audio</button></li>
+                <li><button id="video-tool">Video</button></li>
+            </ul>
+        </section>
+        <section class="timeline">
+            <h2>Timeline</h2>
+            <div id="timeline-container"></div>
+        </section>
+    </main>
+    <script src="edit-studio.js"></script>
+</body>
+</html>
+
+
+<div class="editor-toolbar">
+    <!-- existing buttons -->
+    <button id="text-tool-btn">Text</button>
+    <div id="text-tool-panel" style="display: none;">
+        <select id="font-family-select">
+            <option value="Arial">Arial</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Courier New">Courier New</option>
+        </select>
+        <select id="font-size-select">
+            <option value="12px">12px</option>
+            <option value="14px">14px</option>
+            <option value="16px">16px</option>
+            <option value="18px">18px</option>
+        </select>
+        <input type="color" id="text-color-picker">
+    </div>
+</div>
